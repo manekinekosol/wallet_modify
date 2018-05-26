@@ -1,48 +1,17 @@
-Firefly Wallet
-==============
+## ブランチ元について
+Firefly Walletという海外のプロジェクトからブランチを切っています。
+https://github.com/firefly/wallet
 
-Weclome to the Firefly DIY Air-gapped Hardware Wallet project.
-
-There are still a few things we are working on, but we wanted to start
-getting some files into the hands of eager developers.
-
-Also, if you haven't seen it already, please check out our
-[crowdsale](https://ethers.io/#!/app-link/contribute.firefly.city). By contributing
-to the project, you get your very own yourNameHere.firefly.eth ENS name on the
-Ethereum network and you help fund development of the Firefly.
+ざっくりいうとArduinoにairgap walletを実装するようなものです。
 
 
-Folders
--------
+## 困っていること
+元の実装は専用のアプリケーションと連携してトランザクションに対する署名を送るものですが、Arduino側のBluetoothとかディスプレイの設定とかあります。そこで最も単純なものとして、機能を削って、シリアル通信で署名を送受信するシンプルなものにしました。
+といっても、用意されている関数をいじったりはせず、実行系のファイルfirefly.inoの最終部分のみをいじりました。
 
-### Cases
+これをArduino IDE（開発ツール）で実行しようとすると、関数が複数定義されているというエラーで
+コンパイルが通りません。C言語のコンパイル上の問題で、includeしているライブラリが競合してしまっている様です。
+しかし、元のファイルに関数を書き加えたわけではなく、ちょっとした環境やコンパイル（分割コンパイルとか）による問題
+だと思っています。
 
-Currently limited to 3D printable cases, but we would love to have other
-creative people out there contribute interesting designs.
-
-A better 3D printable case will be published soon, but for the impatient,
-the prototype case is available.
-
-
-### Diagrams
-
-Images and source files used to build documentation. Currently we have a circuit schematic
-and a breadboard layout for prototyping.
-
-
-### Source
-
-The Arduino sketch and required (modified) libraries.
-
-
-Future
-------
-
-- Better 3D printed case; still being designed, but easier to wire (soonish)
-- Printed Circuit Board (PCB) layout for more advanced, but tinier devices (future)
-
-
-License
--------
-
-MIT and BSD license. Each file includes license information at the top.
+知見がある方、、、、どうかお助けを。
